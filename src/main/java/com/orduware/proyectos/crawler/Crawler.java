@@ -38,16 +38,15 @@ public class Crawler {
 		Elements nombres = doc.select("a.athlete-name");
 		Elements puntos = doc.select("span.tour-points");
 		Elements pais = doc.select("span.athlete-nation-abbr");
-		Elements imagenes = doc.select("span.headshot-image");
+		Elements imagenes = doc.select("a.headshot");
 
 		Element eImg;
 
 		for (int i = 1; i < nombres.size(); i++) {
 
 			eImg = imagenes.get(i);
-			String imageStyle = eImg.attr("style");
-			String img = imageStyle.replace("background-image: url(", "");
-			img = imageStyle.replace(");", "");
+
+			String img = eImg.attr("data-img-src");
 
 			System.out.println(i + " " + nombres.get(i).text() + "[" + pais.get(i).text() + "] " + puntos.get(i).text()
 					+ " " + img);
